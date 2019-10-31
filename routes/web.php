@@ -19,3 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/adminpostpage', 'PagesController@adminpostpage');
+Route::get('/admin-post-action', 'PagesController@adminpostaction');
+
+Route::resource('admin-post-action', 'PostsController');
