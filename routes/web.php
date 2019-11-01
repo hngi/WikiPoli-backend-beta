@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
+    return view('index');
+});
+
+route::get('/','apiController@create');
+route::get('/search','apiController@search');
+
+Route::get('/signin', function () {
     return view('signin');
 });
 

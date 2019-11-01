@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\user;
 class apiController extends Controller
 {
-    /*public function create(Request $request)
+    public function create(Request $request)
 	{
-		$users = new user();
+		/*$users = new user();
 
 		$users->full_name = $request->input('full_name');
 		$users->username = $request->input('username');
@@ -16,12 +16,11 @@ class apiController extends Controller
 		$users->password = $request->input('password');
 		$users->status_id = $request->input('status_id');
 		$users->priviledge_id = $request->input('priviledge_id');
-		
-		$users->save();
-		return response()->json($users);
-	}*/
 
-
+        $users->save();*/
+        return view('index');
+		//return response()->json($users);
+	}
 
     public function search(Request $request)
 	{

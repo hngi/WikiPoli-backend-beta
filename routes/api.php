@@ -20,9 +20,9 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 
 //route::post('/user','apiController@create');
-route::get('/search','apiController@search');
+//route::get('/search','apiController@search');
 
-    
+
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
