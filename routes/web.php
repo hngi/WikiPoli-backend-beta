@@ -38,14 +38,7 @@ Route::get('/Donation', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
-Route::get('/adminpostpage', 'PagesController@adminpostpage');
-Route::get('/admin-post-action', 'PagesController@adminpostaction');
-
-Route::resource('admin-post-action', 'PostsController');
-=======
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/create-post', 'Post\PostController@index');
 Route::post('/create-post', 'Post\PostController@create');
 Route::post('/save-draft', 'Post\PostController@draft');
->>>>>>> upstream/dev
