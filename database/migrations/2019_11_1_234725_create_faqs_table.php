@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPriviledgesTable extends Migration
+class CreateFaqsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateUserPriviledgesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_priviledges', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('priviledge_name', 45);
+            $table->string('title');
+            $table->text('content');
+            $table->softDeletes(); // Incase of future purposes
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateUserPriviledgesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_priviledges');
+        Schema::dropIfExists('faqs');
     }
 }

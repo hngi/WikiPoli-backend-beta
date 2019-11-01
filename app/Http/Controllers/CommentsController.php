@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Support\Facades\DB;
-//use Illuminate\Http\Request;
-//use App\Post;
 use Illuminate\Http\Request;
-use App\Posts;
-use App\Comment;
 
-class PostsController extends Controller
+// bring in the relationships
+use App\Comment;
+use App\Posts;
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,8 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $posts = Posts::orderBy('id', 'DESC')->paginate(10);
-        return view('postpage1')->with('posts', $posts);
+    {
+        //
     }
 
     /**
@@ -38,9 +35,31 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $postId)
     {
-        //
+        $data = request()->validate([
+            'comment' => 'required|min:5|max:5000'
+        ]);
+
+        $comment = new Comment;
+        $comment->user = $request->input('user');
+        $comment->comment = $request->input('comment');
+        $comment->posts_id = $postId;
+
+        $comment->save();
+        
+        if ($comment->save()) {
+            $notification = array(
+                'message'    => 'Comment Added Successfully!',
+                'alert-type' => 'success'
+            );
+        } else {
+            $notification = array(
+                'message'    => 'Comment Not Added, Please Try Again!',
+                'alert-type' => 'error'
+            );
+        }
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -51,8 +70,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::find($id);
-        return view('readmore')->with('post', $post);
+        //
     }
 
     /**
