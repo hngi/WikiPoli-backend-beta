@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\user;
+use App\post;
 class apiController extends Controller
 {
     public function create(Request $request)
@@ -25,9 +25,15 @@ class apiController extends Controller
     public function search(Request $request)
 	{
 		$search = $request->get('search');
-		$users = user::where('full_name', 'like', '%'.$search.'%')->paginate(5);
-		return response()->json($users);
-		//return view('index', ['users'=>$users]);
+		$posts = post::where('body', 'like', '%'.$search.'%')->paginate(5);
+		//return response()->json($posts);
+		return view('search', ['posts'=>$posts]);
+    }
+
+    public function show(Request $request)
+	{
+
+		return view('index', ['users'=>$users]);
 	}
 
 

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
+
 route::get('/','apiController@create');
 route::get('/search','apiController@search');
 
