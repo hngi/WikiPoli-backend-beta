@@ -9,6 +9,7 @@ use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\UserStatus;
+use App\Like;
 
 class User extends Authenticatable {
 
@@ -46,6 +47,11 @@ class User extends Authenticatable {
 
     public function user_statuses() {
         return $this->belongsTo(UserStatus::class, 'status_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
     }
 
 }

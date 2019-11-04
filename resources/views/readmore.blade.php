@@ -24,6 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('/styles/readmore.css') }}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
@@ -108,6 +109,19 @@
             <p style="text-align: justify; display: block;">
               {{ $post->body }}
               <div class="icon mt-4">
+                  <form id="like" method="POST">
+                      <input type="hidden" name="actions"  value="like">
+                      <input type='hidden' name='slug' value="{{$post->slug}}" />
+                      <input type='hidden' name='post_id' value="{{$post->id}}" />
+                   </form>
+                   <form id="unlike" method="POST">
+                      <input type="hidden" name="actions"  value="unlike">
+                      <input type='hidden' name='slug' value="{{$post->slug}}" />
+                      <input type='hidden' name='post_id' value="{{$post->id}}" />
+                   </form>
+                  <span class="item-style"><i class=" fa  fa-thumbs-o-up fa-2 like p-like"></i> | <i class=" fa  fa-thumbs-o-down fa-2 unlike p-unlike"></i></span> |
+              <!--<a href="#" class="like"> /*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like' */}}</a> | 
+                <a href="#" class="like">{/*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post' : 'Dislike' : 'Dislike' */}}</a> |--> 
                 <!-- twitter -->
                 <a href="http://www.twitter.com/intent/tweet?url={{ URL::current() }}&text={{ $post->title }}" target="_blank"><img src="https://res.cloudinary.com/siyfa/image/upload/v1571761066/a4zha34vheoeyzypvpqu.png" style="width: 25px;"></a>
                 <!-- facebook -->
@@ -240,8 +254,79 @@
       </div>
     </div>
   </div>  
+  <script>
+    var token = '{{ Session::token() }}';
+    var urlLike = '{{ route('like') }};
+  </script>
   <script async src="https://static.addtoany.com/menu/page.js"></script>
   <script src="{{ asset('/assets/jquery.min.js') }}"></script>
   <script src="{{ asset('/assets/comment.js') }}"></script>
+  <script>
+      jQuery(document).on('click', '.p-like', function(event){
+      var formData = jQuery("#like").serialize();
+      event.preventDefault();
+      $.ajaxSetup({
+      headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      });
+      jQuery.ajax({
+      url: "{{url('/like')}}",
+              type: 'POST',
+              data:  formData,
+              success: function (data) {
+              if (data.status == 200) {
+              $(".u-update").load(" .u-update");
+              return false;
+              }
+              }
+      });
+      });
+          </script>
+ <script>
+      jQuery(document).on('click', '.p-unlike', function(event){
+      var formData = jQuery("#unlike").serialize();
+      event.preventDefault();
+      $.ajaxSetup({
+      headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      });
+      jQuery.ajax({
+      url: "{{url('/like')}}",
+              type: 'POST',
+              data:  formData,
+              success: function (data) {
+              if (data.status == 200) {
+              $(".u-update").load(" .u-update");
+              return false;
+              }
+              }
+      });
+      });
+          </script>
+  <script type="text/javascript">
+  /*$(document).ready(function() {
+    $("a.like").on('click', function(event) {
+      event.preventDefault();
+      postId = event.target.parentNode.parentNode.dataset['postid'];
+      var isLike = event.target.previousElementSibling == null;
+      $.ajax({
+        method: 'POST',
+        url: urlLike,
+        data: {isLike: isLike, postId: postId, _token: token},
+      })
+
+      .done(function() {
+        event.target.innerText = isLike ? event.target.innerText == 'Like' ? 'You like this post' : 'Like' : event.target.innerText == 'Dislike' ? 'You don\'t like this post : 'Dislike';
+        if(isLike) {
+          event.target.nextElementSibling.innerText = 'Dislike';
+        } else {
+          event.target.previousElementSibling.innerText = 'Like';
+        }
+      });
+    });
+  });*/
+  </script>
 </body>
 </html>

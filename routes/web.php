@@ -76,3 +76,9 @@ Route::group(['middleware' => ['role:SuperAdmin|Admin']], function () {
     //users
     Route::get('/admin/users', 'Admin\AdminController@userGet')->name('admin.users');
 });
+
+//like and dislike
+Route::post('/like', [
+    'uses' => 'PostController@postLikePost',
+    'as' => 'like'
+]);
