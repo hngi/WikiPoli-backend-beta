@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ asset('css/styles/about.css') }}"/>
   <link rel="icon" type="img/png" href="images/favicon.png">
-  <title>About Us</title>
+  <title>WikiPoli | About Us</title>
 </head>
 <style type="text/css">
   #footer{
@@ -358,7 +358,7 @@ p {
   <div id="wrapper">
     <div class="container-fluid">
       <nav class="navbar navbar-expand-lg">
-        <a href="index.html" class="navbar-brand logo">
+        <a href="{{ url('/posts') }}" class="navbar-brand logo">
           <img src="https://res.cloudinary.com/fabianuzukwu/image/upload/v1571749198/c09e9odiqy2cvkosfubl.png"
             alt="WikiPoli Logo">
         </a>
@@ -369,7 +369,7 @@ p {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav ml-auto menu">
             <li class="nav-item">
-              <a class="nav-link" href="index.html"><strong>Home</strong></a>
+              <a class="nav-link" href="{{ url('/posts') }}"><strong>Home</strong></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="about.html"><strong>About us</strong></a>
@@ -485,43 +485,7 @@ p {
     </div>
     </div>
 
-    <footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row links">
-						<div class="col-md-4 col-sm-12  text-center">
-							<ul class="quick-links">
-								<li>Legal</li>
-								<li><a href="{{ url('/Terms') }}">Terms of Use</a></li>
-								<li><a href="{{ url('/PrivacyPolicy') }}">Privacy Policy</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4 col-sm-12  text-center">
-							<ul class="quick-links">
-								<li>Company</li>
-								<li><a href="{{ url('/About') }}">About</a></li>
-								<li><a href="{{ url('/Careers') }}">Careers</a></li>
-								<li><a href="{{ url('/FAQs') }}">FAQs</a></li>
-								<li><a href="{{ url('/Donation') }}">Donations</a></li>
-							</ul>
-						</div>
-	
-						<div class="col-md-4 col-sm-12  text-center">
-							<div class="text-center social-links">
-								<h3>Connect With Us</h3>
-								<a href="facebook.com"><span class="fa fa-facebook"></span></a>
-								<a href="twitter.com"><span class="fa fa-twitter"></span></a>
-								<a href="instagram.com"><span class="fa fa-instagram"></span></a>
-								<p>contact@wikipoli.gq</p>
-							</div>
-						</div>
-						<div class="col-lg-12 copyright text-center">
-							<p>&copy; 2019 Wikipoli - All Rights Reserved</p>
-						</div>
-					</div>
-				</div> 
-			</div>
-		</footer>
+    @include('layouts.footer')
 
   </div>
 

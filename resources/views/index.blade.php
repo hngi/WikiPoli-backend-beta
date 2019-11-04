@@ -269,7 +269,7 @@ h1 {
       <div class="row">
         <div class="col-lg-12">
           <div class="form-content">
-            <h1 class="text-center"><strong>Get To Know Your Candidate</strong></h1>
+            <h1 class="text-center"><strong>Get To Know Your Candidate</strong></h1> 
             <form>
               <div class="input-group">
                 <input type="text" placeholder="Enter Politician's Name" class="form-control">

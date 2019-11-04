@@ -6,20 +6,20 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 //use App\Post;
 use Illuminate\Http\Request;
-use App\Posts;
 use App\Comment;
-use App\Like;
+use App\Models\Post;
+use Spatie\Searchable\Search;
+use App\Politician;
 
-class PostsController extends Controller
-{
+class PostsController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
-        $posts = Posts::orderBy('id', 'DESC')->paginate(10);
+    public function index() {
+        $posts = Post::orderBy('id', 'DESC')->whereStatus(1)->paginate(10);
         return view('web.post.index')->with('posts', $posts);
     }
 
@@ -28,9 +28,13 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function search(Request $request) {
+
+        $input = $request->q;
+        $query = "MATCH (first_name,last_name) AGAINST ('$input' IN BOOLEAN MODE)";
+
+        $data['results'] = Politician::whereRaw($query)->with('politicianpost')->get();
+        return view('web.search', $data);
     }
 
     /**
@@ -39,8 +43,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -50,10 +53,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $post = Posts::find($id);
+    public function show($id) {
+
+        $post = Post::find($id);
         return view('readmore')->with('post', $post);
+
     }
 
     /**
@@ -62,8 +66,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -74,8 +77,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -85,40 +87,8 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 
-    public function postLikePost(Request $request)
-    {
-        $post_id = $request['postId'];
-        $is_Like = $request['islike'] === 'true';
-        $update = false;
-        $post = Post::find($post_id);
-        if (!$post) {
-            return null;
-        }
-        $user = Auth::user();
-        $like = $user->likes()->where('post_id', $post_id)->first();
-        if($like) {
-            $already_like = $like->like;
-            $update = true;
-            if (already_like == $is_like) {
-                $like->delete();
-                return null;
-            }
-        } else {
-            $like = new like();
-        }
-        $like->like = $is_like;
-        $like->user_id = $user->id;
-        $like->post_id = $post->id;
-        if ($update) {
-            $like->update();
-        } else {
-            $like->save();
-        }
-        return null;
-    }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 // bring in the relationships
 use App\Comment;
-use App\Posts;
+use App\Models\Post;
 class CommentsController extends Controller
 {
     /**
@@ -44,7 +44,7 @@ class CommentsController extends Controller
         $comment = new Comment;
         $comment->user = $request->input('user');
         $comment->comment = $request->input('comment');
-        $comment->posts_id = $postId;
+        $comment->post_id = $postId;
 
         $comment->save();
         

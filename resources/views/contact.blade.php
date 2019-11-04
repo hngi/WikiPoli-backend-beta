@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('css/styles/contact.css') }}"/>
   <link rel="icon" type="img/png" href="images/favicon.png">
-  <title>Contact Us</title>
+  <title>WikiPoli | Contact Us</title>
   <style>
     #footer{
              background: #6D9BF1 !important;
@@ -23,43 +23,7 @@
 </head>
 <body>
   <div id="wrapper">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg">
-
-        <a href="index.html" class="navbar-brand logo">
-
-          <img src="https://res.cloudinary.com/fabianuzukwu/image/upload/v1571749198/c09e9odiqy2cvkosfubl.png"
-            alt="WikiPoli Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="nav navbar-nav ml-auto menu">
-            <!-- Show post only if user is authenticated -->
-
-            <!-- <li class="nav-item active">
-              <a class="posts-nav-link " href="post-page-2.html"><strong>Posts</strong></a>
-            </li> -->
-
-            <!-- Show users name too if they're authenticated -->
-
-            <!-- <li class="nav-item active">
-             
-              <a class="nav-link user-name-link" href="#"><strong>John Doe</strong></a>
-            </li> -->
-
-            <!-- Show login if user is not authenticated -->
-            
-            <li class="nav-item">
-              <a class="posts-nav-link " href="postpage1.html"><strong>Posts</strong></a>
-            </li>
-          </ul>
-          <!-- <button type="submit" class="button-signup">Posts</button> -->
-        </div>
-      </nav>
-    </div>
+  @include('layouts.header')
 
     <div class="container mx-auto">
       <h1 class="text-center mt-3 mb-5 pb-3">Get in Touch</h1>

@@ -6,6 +6,11 @@
     $text = $text."...";
     return $text;
   }
+  // function to rewrite the title for valid SEO
+  function rewriteText($string) {
+    $text = preg_replace('/[^-a-z0-9-]+/', '-', strtolower($string));
+    return $text;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +22,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>WIKIPOLI - {{ $post->title }}</title>
+    <title>WIKIPOLI - {{ rewriteText($post->title) }}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
@@ -30,7 +35,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="{{ URL::current() }}">
     <meta name="twitter:creator" content="">
-    <meta name="twitter:title" content="{{ $post->title }}">
+    <meta name="twitter:title" content="{{ rewriteText($post->title) }}">
     <meta name="twitter:description" content="{{ textShorten($post->body) }}">
     <meta name="twitter:image" content="https://res.cloudinary.com/fabianuzukwu/image/upload/v1571749198/c09e9odiqy2cvkosfubl.png">
 
@@ -78,24 +83,28 @@
       <div class="col-md-7">
       </div>
       <div class="col-md-5">
+           <form action="{{url('search')}}" method="get">
         <div class="input-group mb-3" style="text-align-last: inherit;">
-          <input type="text" class="form-control" id="input" placeholder="Enter Politicial Name"/>
+          <input type="text" name="q" class="form-control" id="input" placeholder="Enter Politicial Name"/>
           <div class="input-group-append">
-            <span class="input-group-text">Search</span>
+            <button type="submit"class="input-group-text">Search</button>
           </div>
         </div>
+           </form>
       </div>
     </div>
     @else 
     <div class="col-md-7">
     </div>
     <div class="col-md-5">
+         <form action="{{url('search')}}" method="get">
       <div class="input-group mb-3" style="text-align-last: inherit;">
-        <input type="text" class="form-control" id="input" placeholder="Enter Politicial Name"/>
+        <input type="text" name="q" class="form-control" id="input" placeholder="Enter Politicial Name"/>
         <div class="input-group-append">
-          <span class="input-group-text">Search</span>
+          <button type="submit" class="input-group-text">Search</button>
         </div>
       </div>
+         </form>
     </div>
     @endif    
       <br />
@@ -107,7 +116,7 @@
           <div class="col-md-12">
             <h1>{{ $post->title }}</h1>
             <p style="text-align: justify; display: block;">
-              {{ $post->body }}
+              {!! $post->body !!}
               <div class="icon mt-4">
                   <form id="like" method="POST">
                       <input type="hidden" name="actions"  value="like">
@@ -123,7 +132,7 @@
               <!--<a href="#" class="like"> /*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like' */}}</a> | 
                 <a href="#" class="like">{/*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post' : 'Dislike' : 'Dislike' */}}</a> |--> 
                 <!-- twitter -->
-                <a href="http://www.twitter.com/intent/tweet?url={{ URL::current() }}&text={{ $post->title }}" target="_blank"><img src="https://res.cloudinary.com/siyfa/image/upload/v1571761066/a4zha34vheoeyzypvpqu.png" style="width: 25px;"></a>
+                <a href="http://www.twitter.com/intent/tweet?url={{ URL::current() }}&text={{ rewriteText($post->title) }}" target="_blank"><img src="https://res.cloudinary.com/siyfa/image/upload/v1571761066/a4zha34vheoeyzypvpqu.png" style="width: 25px;"></a>
                 <!-- facebook -->
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::current() }}" target="_blank"><img src="https://res.cloudinary.com/siyfa/image/upload/v1571761008/bzosk4pcqvpldu59bo0w.png" style="width: 25px;"></i></a>
                 <a href="" aria-hideen="true"><img src="https://res.cloudinary.com/siyfa/image/upload/v1571760662/hq5ctfvhjv3r05bqdski.png" style="width: 25px;"></a>
@@ -196,7 +205,7 @@
                     @enderror
                   </div>
                   <input type="hidden" name="user" value="{{ Auth::user()->full_name }}">
-                  <input type="hidden" name="post_id" value="{{ $post->post_id }}">
+                  <input type="hidden" name="post_id" value="{{ $post->id }}">
 
                   <div class="form-group row mb-0">
                     <div class="">

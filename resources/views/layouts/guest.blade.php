@@ -12,7 +12,7 @@
         <link rel="icon" type="img/png" href="{{asset('images/favicon.png')}}">
         <link rel="manifest" href="{{asset('js/manifest.json')}}" />
         <meta name="theme-color" content="#333" />
-    </head
+    </head>
     <body>
         <div id="wrapper">
              @include('layouts.guest_navbar')

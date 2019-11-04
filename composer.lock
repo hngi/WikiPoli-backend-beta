@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "a16d92585bdf96ee511504b2f0ff514e",
+=======
+    "content-hash": "9d58924ec841df9c9fdec80a44888daf",
+>>>>>>> f1be3110069d5fe1a0a258889278f655f3493f22
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -2261,6 +2265,8 @@
         {
             "name": "spatie/laravel-permission",
             "version": "3.2.0",
+<<<<<<< HEAD
+=======
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-permission.git",
@@ -2325,6 +2331,62 @@
                 "spatie"
             ],
             "time": "2019-10-16T19:25:56+00:00"
+        },
+        {
+            "name": "spatie/laravel-searchable",
+            "version": "1.4.0",
+>>>>>>> f1be3110069d5fe1a0a258889278f655f3493f22
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-searchable.git",
+                "reference": "78dac928cbf352b4ee3108bcbeb64a80d41965bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-searchable/zipball/78dac928cbf352b4ee3108bcbeb64a80d41965bf",
+                "reference": "78dac928cbf352b4ee3108bcbeb64a80d41965bf",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.8.0|^6.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "orchestra/testbench": "~3.8.0|^4.0",
+                "phpunit/phpunit": "^7.5|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Searchable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Pragmatically search through models and other sources",
+            "homepage": "https://github.com/spatie/laravel-searchable",
+            "keywords": [
+                "laravel-searchable",
+                "spatie"
+            ],
+            "time": "2019-09-04T11:30:38+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

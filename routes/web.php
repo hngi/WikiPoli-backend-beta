@@ -13,7 +13,7 @@
  */
 
 Route::get('/', function () {
-    return view('web.index');
+    return view('indexnew');
 });
 Route::get('/Terms', function () {
     return view('Terms-of-use');
@@ -34,18 +34,17 @@ Route::get('/Donation', function () {
     return view('donate_and_support_page');
 });
 
-//Route::get('/posts', 'Web\WebController@index');
 Route::get('/posts', 'PostsController@index');
+//search
+Route::get('/search', 'PostsController@search')->name('search');
 
-
-Route::get('/post/{id}', 'PostsController@show')->name('post.show');
+Route::get('/posts/{id}/{post_title}', 'PostsController@show')->name('post.show');
 Route::post('/comments/{id}', 'CommentsController@store');
+Route::get('/user_profile', 'Post\PostController@userprofile');
 
 
 // Auth::routes();
-
 // Route::get('/home', 'HomeController@index')->name('home');
-
 // Route::group(['middleware' => ['auth']], function () {
 //      Route::get('/user', 'AuthControllers');
 // });
@@ -53,11 +52,12 @@ Route::post('/comments/{id}', 'CommentsController@store');
 
 Auth::routes();
 
-Route::get('/home1', 'HomeController@index')->name('home');
-Route::get('/home', 'Web\WebController@index');
+Route::get('/home', 'PostsController@index')->name('home');
+//user creae post
 Route::get('/create-post', 'Post\PostController@index');
 Route::post('/create-post', 'Post\PostController@create');
-Route::post('/save-draft', 'Post\PostController@draft');
+Route::post('/draf-post', 'Post\PostController@draft');
+
 
 
 
@@ -72,9 +72,29 @@ Route::group(['middleware' => ['role:SuperAdmin|Admin']], function () {
     Route::post('delete-temporary-post/{id}', 'Admin\AdminController@deleteTemporary');
     Route::post('delete-permanently-post/{id}', 'Admin\AdminController@deletePermanently');
     Route::post('delete-restore-post/{id}', 'Admin\AdminController@restore');
-    
+    Route::get('/admin/edit-post/{id}', 'Admin\AdminController@showEdit')->name('admin.edit-post');
+     Route::get('/admin/view-post/{id}', 'Admin\AdminController@viewEdit')->name('admin.view-post');
+    Route::post('edit-post', 'Admin\AdminController@edit');
     //users
     Route::get('/admin/users', 'Admin\AdminController@userGet')->name('admin.users');
+    Route::post('block-user/{id}', 'Admin\AdminController@block');
+    Route::post('unblock-user/{id}', 'Admin\AdminController@Unblock');
+    Route::post('delete-temporary-user/{id}', 'Admin\AdminController@deleteTemporaryUser');
+    Route::post('delete-permanently-user/{id}', 'Admin\AdminController@deletePermanentlyUser');
+    Route::post('restore-user/{id}', 'Admin\AdminController@restoreUser');
+    Route::post('remove-admin/{id}', 'Admin\AdminController@removeAdmin');
+    Route::post('remove-superadmin/{id}', 'Admin\AdminController@removeSuperAdmin');
+    Route::post('make-admin/{id}', 'Admin\AdminController@makeAdmin');
+    Route::post('make-superadmin/{id}', 'Admin\AdminController@makeSuperAdmin');
+    //all-admins
+
+    Route::get('/admin/all-admins', 'Admin\AdminController@adminGet')->name('admin.all-admins');
+    //recent Activities
+    Route::get('/admin/activities', 'Admin\AdminController@activity')->name('admin.activities');
+
+    //politicians
+    Route::get('/admin/politicians', 'Admin\AdminController@politicianGet')->name('admin.politicians');
+    Route::post('add-politician', 'Admin\AdminController@addPolitician');
 });
 
 //like and dislike

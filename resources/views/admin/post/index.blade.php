@@ -12,8 +12,8 @@
         </div>
         <div id="user-div">
             <span id="name-plate">
-                @if(session()->has('message.content'))
-                {!! session('message.content') !!} ,
+                @if(session()->has('login.content'))
+                {!! session('login.content') !!} ,
                 @endif
                 {{Auth::user()->full_name}}
             </span>
@@ -91,10 +91,10 @@
                                                 @csrf
                                                 <button  class="dropdown-item text-success noHover" type="submit"> <i class="fas fa-undo"></i> Restore</button>
                                             </form>
-                                           
+
                                             @else
-                                            <button class="dropdown-item text-success" data-toggle="modal" data-target="#myModal"><i class="fas fa-binoculars"></i> View</button>
-                                            <button class="dropdown-item text-warning"  data-toggle="modal" data-target="#edit{{$post->id}}" ><i class="fas fa-edit"></i> Edit</button>
+                                            <a class="dropdown-item text-success" href="{{ url('admin/view-post', $post->id) }}"><i class="fas fa-binoculars"></i> View</a>
+                                            <a class="dropdown-item text-warning" href="{{ url('admin/edit-post', $post->id) }}" ><i class="fas fa-edit"></i> Edit</a>
 
                                             <form  class="deleted"   role="form" method="POST"
                                                    action="{{url('delete-temporary-post',['id'=>$post->id])}}" >
@@ -127,30 +127,6 @@
                             </tr>
 
 
-                            <!-- The Modal -->
-                        <div class="modal" id="edit{{$post->id}}">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        Modal body..
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                         @empty
                         <div class="text-center ">
                             @if (Request()->filter && Request()->filter == 'soft')
@@ -173,4 +149,136 @@
         </div>
     </section>
 </main>
+@section('script')
+<script src="{{asset('admin/assets/js/vendor/quill.min.js')}}"></script>
+
+<script src="{{asset('admin/assets/js/image-resize.min.js')}}"></script>
+
+
+<script>
+
+var quill = new Quill('#editor', {
+    theme: 'snow',
+    modules: {
+
+        syntax: true,
+        imageResize: {
+            displaySize: true
+
+
+        },
+
+        toolbar: [
+            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            ['bold', 'italic', 'underline'],
+            [{'color': []}, {'background': []}],
+            [{'align': []}],
+            ['link', 'image', 'video'],
+            ['clean']
+        ]
+    }
+});
+</script>
+<script>
+    $(document).ready(function () {
+        $("#addpost button").click(function (ev) {
+            ev.preventDefault()
+            if ($(this).attr("value") == "draft") {
+                var myEditor = document.querySelector('#editor');
+                var html = myEditor.children[0].innerHTML;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function () {
+                        $(".modal").show();
+                    },
+                    complete: function () {
+                        $(".modal").hide();
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{url('/draf-post')}}",
+                    type: 'POST',
+                    data: {
+                        title: jQuery('#post_title').val(),
+                        body: html
+
+
+                    },
+                    success: function (data) {
+                        if (data.status === 401) {
+                            jQuery.each(data.message, function (key, value) {
+                                var message = ('' + value + '');
+                                toastr.error(message, {timeOut: 50000});
+                            });
+                            return false;
+                        }
+
+                        if (data.status === 422) {
+                            var message = data.message;
+                            toastr.info(message, {timeOut: 50000});
+                            return false;
+                        }
+                        if (data.status === 200) {
+                            var message = data.message;
+                            toastr.success(message, {timeOut: 50000});
+                            return false;
+                        }
+                    }
+
+                });
+
+            }
+            if ($(this).attr("value") == "post") {
+                var myEditor = document.querySelector('#editor');
+                var html = myEditor.children[0].innerHTML;
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function () {
+                        $(".modal").show();
+                    },
+                    complete: function () {
+                        $(".modal").hide();
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{url('/create-post')}}",
+                    type: 'POST',
+                    data: {
+                        title: jQuery('#post-title').val(),
+                        body: html
+
+
+                    },
+                    success: function (data) {
+                        if (data.status === 401) {
+                            jQuery.each(data.message, function (key, value) {
+                                var message = ('' + value + '');
+                                toastr.error(message, {timeOut: 50000});
+                            });
+                            return false;
+                        }
+
+                        if (data.status === 422) {
+                            var message = data.message;
+                            toastr.info(message, {timeOut: 50000});
+                            return false;
+                        }
+                        if (data.status === 200) {
+                            var message = data.message;
+                            toastr.success(message, {timeOut: 50000});
+                            return false;
+                        }
+                    }
+
+                });
+            }
+        });
+    });
+</script> 
+
+@endsection
 @endsection

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/styles/footer.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/styles/careers.css') }}"/>
     <link rel="icon" type="img/png" href="images/favicon.png">
-    <title>Careers </title>
+    <title>WikiPoli | Careers </title>
     <style>
 
 footer {
@@ -193,30 +193,7 @@ line-height: 1.5;
 
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-custom bg-custom">
-        <div class="container">
-            <a href="index.html" class="logo"><img
-                    src="https://res.cloudinary.com/fabianuzukwu/image/upload/v1571749198/c09e9odiqy2cvkosfubl.png"
-                    alt="logo" class="img-fluid" width="150px;"></a>
-            <button class="navbar-toggler float-right custom-toggler" type="button" data-toggle="collapse"
-                data-target="#navbar9" style="color: #213dcd;">
-                <span class=" show-nav navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="navbar9">
-                <ul class="navbar-nav ml-auto">
-                    , <li class="navbar-item mr-5">
-                        <a href="index.html" class="btn navbar-link" id="signUp">Home</a>
-                    </li>
-                    <li class="navbar-item mr-5">
-                        <a href="about.html" class="btn navbar-link" id="signUp">About Us</a>
-                    </li>
-                    <li class="navbar-item mr-5">
-                        <a href="contact.html" class="btn navbar-link" id="signUp">Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.header')
 
     <div class="join-team w-100">
         <h2>Join Our Team</h2>
@@ -327,43 +304,7 @@ line-height: 1.5;
 
         </div>
     </main>
-    <footer>
-			<div id="footer">
-				<div class="container">
-					<div class="row links">
-						<div class="col-md-4 col-sm-12  text-center">
-							<ul class="quick-links">
-								<li>Legal</li>
-								<li><a href="{{ url('/Terms') }}">Terms of Use</a></li>
-								<li><a href="{{ url('/PrivacyPolicy') }}">Privacy Policy</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4 col-sm-12  text-center">
-							<ul class="quick-links">
-								<li>Company</li>
-								<li><a href="{{ url('/About') }}">About</a></li>
-								<li><a href="{{ url('/Careers') }}">Careers</a></li>
-								<li><a href="{{ url('/FAQs') }}">FAQs</a></li>
-								<li><a href="{{ url('/Donation') }}">Donations</a></li>
-							</ul>
-						</div>
-	
-						<div class="col-md-4 col-sm-12  text-center">
-							<div class="text-center social-links">
-								<h3>Connect With Us</h3>
-								<a href="facebook.com"><span class="fa fa-facebook"></span></a>
-								<a href="twitter.com"><span class="fa fa-twitter"></span></a>
-								<a href="instagram.com"><span class="fa fa-instagram"></span></a>
-								<p>contact@wikipoli.gq</p>
-							</div>
-						</div>
-						<div class="col-lg-12 copyright text-center">
-							<p>&copy; 2019 Wikipoli - All Rights Reserved</p>
-						</div>
-					</div>
-				</div> 
-			</div>
-		</footer>
+    @include('layouts.footer')
 
 </body>
 
