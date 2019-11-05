@@ -128,7 +128,7 @@
                       <input type='hidden' name='slug' value="{{$post->slug}}" />
                       <input type='hidden' name='post_id' value="{{$post->id}}" />
                    </form>
-                  <span class="item-style"><i class=" fa  fa-thumbs-o-up fa-2 like p-like" style="font-size:50px;"></i> | <i class=" fa  fa-thumbs-o-down fa-2 unlike p-unlike" style="font-size:50px;"></i></span> |
+                  <span class="item-style"><i class=" fa  fa-thumbs-o-up fa-2 like p-like" style="font-size:30px;cursor:pointer;"></i>  |  <i class=" fa  fa-thumbs-o-down fa-2 unlike p-unlike" style="font-size:30px;cursor:pointer;"></i></span>  | 
               <!--<a href="#" class="like"> /*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like' */}}</a> | 
                 <a href="#" class="like">{/*Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this post' : 'Dislike' : 'Dislike' */}}</a> |--> 
                 <!-- twitter -->
@@ -272,26 +272,26 @@
   <script src="{{ asset('/assets/comment.js') }}"></script>
   <script>
       jQuery(document).on('click', '.p-like', function(event){
-      var formData = jQuery("#like").serialize();
-      event.preventDefault();
-      $.ajaxSetup({
-      headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
+        var formData = jQuery("#like").serialize();
+        event.preventDefault();
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        });
+        jQuery.ajax({
+        url: "{{ action('PostController@postLikePost') }}",
+                type: 'POST',
+                data:  formData,
+                success: function (data) {
+                if (data.status == 200) {
+                $(".u-update").load(" .u-update");
+                return false;
+                }
+                }
+        });
       });
-      jQuery.ajax({
-      url: "{{url('/like')}}",
-              type: 'POST',
-              data:  formData,
-              success: function (data) {
-              if (data.status == 200) {
-              $(".u-update").load(" .u-update");
-              return false;
-              }
-              }
-      });
-      });
-          </script>
+  </script>
  <script>
       jQuery(document).on('click', '.p-unlike', function(event){
       var formData = jQuery("#unlike").serialize();
@@ -302,7 +302,7 @@
       },
       });
       jQuery.ajax({
-      url: "{{url('/like')}}",
+      url: "{{url('/dislike')}}",
               type: 'POST',
               data:  formData,
               success: function (data) {

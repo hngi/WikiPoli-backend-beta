@@ -98,7 +98,12 @@ Route::group(['middleware' => ['role:SuperAdmin|Admin']], function () {
 });
 
 //like and dislike
-Route::post('/like', [
+Route::post('/post/{id}/like', [
     'uses' => 'PostController@postLikePost',
     'as' => 'like'
+]);
+
+Route::post('/dislike', [
+    'uses' => 'PostController@postDislikePost',
+    'as' => 'dislike'
 ]);

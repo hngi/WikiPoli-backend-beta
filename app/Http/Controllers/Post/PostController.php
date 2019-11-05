@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Politician;
 use Spatie\Searchable\Search;
 use App\PoliticianPost;
+use App\Postutility;
 
 class PostController extends Controller {
 
@@ -81,5 +82,15 @@ class PostController extends Controller {
         }
     }
 
-   
+   public function postLikePost(){
+        if(Auth::check()) {
+            $user=Auth::user();
+            $post=DB::table('posts')->get();
+            if($user==true) {
+                $like = DB::table('postutilities')->insert(
+                    ['user_id' => $user->id, 'post_id' => $post->id, 'post_like' => true, 'post_dislike' => false]
+                );
+            }
+        }
+   }
 }
