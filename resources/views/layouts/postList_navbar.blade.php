@@ -8,7 +8,8 @@
             <ul id="main-navbar" class="navbar-nav ml-auto"> 
                  @Auth
                   <li class="navbar-item mr-5">
-                    <a href="{{url('user_profile')}}" class="navbar-link" style="color: black;" id="logIn">{{Auth::user()->full_name}}</a>
+                  
+                    <a href="{{url('user_profile')}}" class="navbar-link" style="color: black;" id="logIn"><img src="/uploads/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; border-radius:50%;">{{Auth::user()->full_name}}</a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}" id="btn" class="btn btn-sm btn-primary"

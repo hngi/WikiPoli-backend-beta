@@ -118,6 +118,7 @@
             <p style="text-align: justify; display: block;">
               {!! $post->body !!}
               <div class="icon mt-4">
+                <!-- Like and Unlike hidden form -->
                   <form id="like" method="POST">
                       <input type="hidden" name="actions"  value="like">
                       <input type='hidden' name='slug' value="{{$post->slug}}" />
@@ -271,6 +272,7 @@
   <script src="{{ asset('/assets/jquery.min.js') }}"></script>
   <script src="{{ asset('/assets/comment.js') }}"></script>
   <script>
+    /*jQuery and ajax script for like */
       jQuery(document).on('click', '.p-like', function(event){
         var formData = jQuery("#like").serialize();
         event.preventDefault();
@@ -293,6 +295,7 @@
       });
   </script>
  <script>
+   /*jQuery and ajax script for unlike */
       jQuery(document).on('click', '.p-unlike', function(event){
       var formData = jQuery("#unlike").serialize();
       event.preventDefault();

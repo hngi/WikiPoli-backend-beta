@@ -41,6 +41,9 @@ Route::get('/search', 'PostsController@search')->name('search');
 Route::get('/posts/{id}/{post_title}', 'PostsController@show')->name('post.show');
 Route::post('/comments/{id}', 'CommentsController@store');
 Route::get('/user_profile', 'Post\PostController@userprofile');
+Route::get('/edit/profile', 'Post\PostController@editUserProfile');
+Route::post('/edit/profile/{id}', 'Post\PostController@updateUserProfile');
+Route::post('/user_profile', 'Post\PostController@updateAvatar');
 
 
 // Auth::routes();

@@ -22,9 +22,9 @@
    <div class="intro-section__name float-left mt-5 pt-2">
      <p class="john-doe"></p>
    </div>
-          <div class="container" style="margin-bottom: 5%; margin-top: 10%;">
+          <!-- <div class="container" style="margin-bottom: 5%; margin-top: 10%;">
            <img class="img-fluid"  src="https://res.cloudinary.com/nkechi-christabel/image/upload/ar_16:9,c_fill,e_sharpen,g_auto,h_700,w_1900/v1571932477/iq3kkzskgnpkpdafppi7.jpg" alt="Fela Durotoye" style="width: 100%; height: 100% !important;">
-          </div>          
+          </div>           -->
         </section>
         </main>
         <!--Nkechi's work ends here-->
@@ -32,11 +32,18 @@
         <main class="container" style="padding-left: 5.4%;">
             <div class="row">
                 <div class=" aside col-12 col-sm-4 col-md-4 col-lg-4 py-15">
+                <img src="/uploads/avatars/{{ $user->avatar }}" style="width:150px; height:150px; border-radius:50%; display:block; margin-left:auto; margin-right:auto;"><br>
+                <form enctype="multipart/form-data" action="/user_profile" method="POST">
+                  <input type="file" name="avatar" style="display:block; margin-left:auto; margin-right:auto;">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <input type="submit" value="Update Avatar" class="btn btn-primary btn-blue mt-3" style="display:block; margin-left:auto; margin-right:auto;">
+                </form>
                     <h2>{{$user->full_name}}</h2>
                     <p>{{$user->description}} <br> <b><i class="fas fa-map-marker-alt"></i> {{$user->location}}</b> </p>
     
                     <p><i class="far fa-calendar-alt"></i> Joined {{date('F d, Y', strtotime($user->created_at))}}</p>
                     <p class="contrib"><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{count($posts)}} Posts &nbsp; </b></p>
+                    <a href="{{ url('/edit/profile') }}" class="btn btn-lg btn-primary btn-blue btn-block mt-3">Edit Profile</a>
 
                     <!-- FOR THE FOLLOW AND UNFOLLOW FEATURES -->
                     <div></div>
@@ -61,7 +68,7 @@
                       </span>
                     </div> -->
                     <div></div>
-                    <div class="images">
+                    <!-- <div class="images">
                         
                           <img src="https://res.cloudinary.com/nkechi-christabel/image/upload/c_scale,h_190,w_281/v1571752819/yrwoswyydymwlcjraa1d.jpg" alt="...">
                           
@@ -78,19 +85,15 @@
                             
                             <img class="last" src="https://res.cloudinary.com/nkechi-christabel/image/upload/c_scale,h_190,w_281/v1571752819/yrwoswyydymwlcjraa1d.jpg" alt="...">
                             
-                      </div>
-                      <div class="images marg">
+                    </div>
+                    <div class="images marg">
                         
                             <img src="https://res.cloudinary.com/nkechi-christabel/image/upload/c_scale,h_190,w_281/v1571752819/yrwoswyydymwlcjraa1d.jpg" alt="...">
                             
                             <img src="https://res.cloudinary.com/nkechi-christabel/image/upload/c_scale,h_190,w_281/v1571752819/yrwoswyydymwlcjraa1d.jpg" alt="...">
                             
                             <img class="last" src="https://res.cloudinary.com/nkechi-christabel/image/upload/c_scale,h_190,w_281/v1571752819/yrwoswyydymwlcjraa1d.jpg" alt="...">
-
-                           
-                          
-                            
-                      </div>
+                    </div> -->
                 
                 </div>
                 <!-- TechieNg Work continues on footer -->
@@ -105,7 +108,8 @@
                   <hr>
                   @foreach($posts as $post)
                   <div class="col-3 col-sm-2 col-md-2 col-lg-2 mt-3">
-                    <img class="image" src="https://res.cloudinary.com/lissacinta/image/upload/v1571955638/image2_gvpo75.png" alt="">
+                    <!-- <img class="image" src="https://res.cloudinary.com/lissacinta/image/upload/v1571955638/image2_gvpo75.png" alt=""> -->
+                    <img src="/uploads/avatars/{{ $user->avatar }}" style="width:100px; height:100px; border-radius:50%;">
                     
                   </div>
                   <div class="aside_content col-9 col-sm-10 col-md-10 col-lg-10 ml-auto">    
