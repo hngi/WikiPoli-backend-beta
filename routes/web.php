@@ -70,10 +70,11 @@ Auth::routes();
 
 Route::get('/home', 'PostsController@index')->name('home');
 //user creae post
-Route::get('/create-post', 'Post\PostController@index');
+Route::get('/create-post', 'Post\PostController@index')->name('create-post');
 Route::post('/create-post', 'Post\PostController@create');
 Route::post('/draf-post', 'Post\PostController@draft');
 Route::post('/post-takedown', 'Post\PostController@takeDown');
+Route::get('/drafts/{id}', 'Post\PostController@get_drafts');
 
 
 Route::post('/like-post', 'PostReactionController@like')->name('like-post');
