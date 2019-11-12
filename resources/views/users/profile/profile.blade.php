@@ -453,9 +453,10 @@
 											<li class="nav-item">
 												<a class="nav-link" href="#general_post" data-toggle="tab">Liked Posts</a>
 											</li>
-											<!-- <li class="nav-item">
-												<a class="nav-link" href="#">Followers List</a>
-											</li> -->
+											
+                                            <li class="nav-item">
+												<a class="nav-link" href="#draft_post" data-toggle="tab">My Drafts</a>
+											</li>
 									</ul>
 
 
@@ -479,6 +480,23 @@
 																	<h3><a href="{{url('posts/'.$post->slug)}}">{{$post->title}}</a> <span> {{date('F d, Y', strtotime($post->created_at))}}</span></h3>
 
 																	<p>{!! textShorten($post->body) !!}<br><a href="{{url('posts/'.$post->slug)}}">Read More</a></p>
+															</div>
+															
+													</div>
+                                                @endforeach
+
+                                                </div>
+
+                                                <div class="tab-pane container active" id="draft_post">
+                                                
+                                                @foreach($drafts as $draft)
+													<div class="post_cont">
+                                                        <img src="/uploads/avatars/{{ Auth::user()->avatar }}" class=" justify-content-center" alt="" style="width:100px; height:100px; border-radius:50%; padding:11px; margin-left:auto; margin-right:auto;">
+
+															<div class="post_det"> 
+																	<h3><a href="{{url('drafts/'.$draft->id)}}">{{$draft->title}}</a> <span> {{date('F d, Y', strtotime($draft->created_at))}}</span></h3>
+
+																	<p>{!! textShorten($draft->body) !!}<br><a href="{{url('draft/'.$draft->id)}}">Read More</a></p>
 															</div>
 															
 													</div>

@@ -16,7 +16,7 @@
         @csrf
         <div id="editor-wrapper">
  
-            <input type="text"  name="title" id="post-title" placeholder="Post Title">
+            <input type="text"  name="title"  id="post-title" placeholder="Post Title">
             <div class="clearfix"></div>
             <br/>
             <div class="custom-file">
@@ -26,9 +26,9 @@
             <div class="clearfix"></div>
             <br/>
 
-            <div id="editor" style="height: 350px; background-color: #fff!important">
+            <div id="editor"  style="height: 350px; background-color: #fff!important">
 
-
+            
 
             </div>
 
@@ -70,6 +70,7 @@ var quill = new Quill('#editor', {
         ]
     }
 });
+
 </script>
 <script>
     $(document).ready(function () {
